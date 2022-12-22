@@ -1,3 +1,3 @@
 export default function App() {
-  return <div>Hello World</div>;
+  return <div>{process.env.OPEN_API_URL}</div>;
 }

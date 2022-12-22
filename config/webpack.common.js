@@ -1,24 +1,26 @@
 /* eslint-disable import/no-extraneous-dependencies */
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const { CleanWebpackPlugin } = require("clean-webpack-plugin");
-const { ProvidePlugin } = require("webpack");
-const path = require("path");
+const { ProvidePlugin, DefinePlugin } = require("webpack");
+const { join } = require("path");
+
+require("dotenv").config({ path: join(__dirname, "..", ".env") });
 
 module.exports = {
     entry: {
         vendor: ["react", "react-dom"],
-        app: path.resolve(__dirname, "../src", "index.tsx"),
+        app: join(__dirname, "..", "src", "index.tsx"),
     },
     output: {
-        path: path.resolve(__dirname, "../dist"),
+        path: join(__dirname, "..", "dist"),
         filename: "[name].bundle.js",
         clean: true,
     },
     resolve: {
         extensions: [".ts", ".tsx", ".js"],
         alias: {
-            components: path.resolve(__dirname, "../src", "components"),
-            assets: path.resolve(__dirname, "../src", "assets"),
+            components: join(__dirname, "..", "src", "components"),
+            assets: join(__dirname, "..", "src", "assets"),
         },
     },
     module: {
@@ -45,8 +47,7 @@ module.exports = {
     plugins: [
         new CleanWebpackPlugin(),
         new ProvidePlugin({ React: "react" }),
-        new HtmlWebpackPlugin({
-            template: path.resolve(__dirname, "../public", "index.html"),
-        }),
+        new HtmlWebpackPlugin({ template: join(__dirname, "..", "public", "index.html") }),
+        new DefinePlugin({ "process.env": JSON.stringify(process.env) }),
     ],
 };
