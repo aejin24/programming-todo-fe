@@ -1,2 +1,1 @@
-# react-boilerplate
-react + typescript + scss + webpack
+# concert-calendar
