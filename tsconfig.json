@@ -23,7 +23,7 @@
     "outDir": "dist",
     "paths": {
       "components/*": ["./src/components/*"],
-      "scss/*": ["./src/assets/scss/*"],
+      "assets/*": ["./src/assets/*"],
     }
   },
   "include": ["./src/**/*"],
