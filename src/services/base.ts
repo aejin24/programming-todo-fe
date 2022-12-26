@@ -1,26 +1,32 @@
-/* eslint-disable no-console */
 import axios from "axios";
+import failureHandler from "./failureHandler";
 
 export const Axios = axios.create({
     baseURL: process.env.API_URL,
-    timeout: 5000,
+    timeout: 1000,
     headers: {
         "Content-Type": "application/json",
     },
 });
+
+const commonHandler = (error: any) => {
+    if (error.code === "ECONNABORTED") {
+        return Promise.reject("요청이 만료되었습니다.");
+    }
+
+    if (error.code === "ERR_NETWORK") {
+        return Promise.reject("네트워크를 확인해주세요.");
+    }
+
+    throw failureHandler(error);
+}
 
 Axios.interceptors.request.use(
     (config) => {
         return config;
     },
     (error) => {
-        console.error(error);
-
-        if (error.code === "ERR_NETWORK") {
-            throw Error("네트워크를 확인해주세요");
-        }
-
-        return Promise.reject(error);
+        commonHandler(error);
     }
 );
 
@@ -29,14 +35,6 @@ Axios.interceptors.response.use(
         return response.data;
     },
     (error) => {
-        console.error(error);
-
-        if (error.code === "ERR_NETWORK") {
-            throw Error("네트워크를 확인해주세요");
-        }
-
-        console.log(error.response.status); // 404
-
-        return Promise.reject(error);
+        commonHandler(error);
     }
 );
