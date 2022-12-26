@@ -1,3 +1,11 @@
+import { Axios } from "services/base";
+
 export default function App() {
-  return <div>{process.env.OPEN_API_URL}</div>;
+  async function testF() {
+    const test = await Axios.get("localIsd/sdfd");
+  }
+
+  testF();
+
+  return <div>{process.env.API_URL}</div>;
 }

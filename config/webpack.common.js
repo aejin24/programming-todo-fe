@@ -20,6 +20,8 @@ module.exports = {
         extensions: [".ts", ".tsx", ".js"],
         alias: {
             components: join(__dirname, "..", "src", "components"),
+            pages: join(__dirname, "..", "src", "pages"),
+            services: join(__dirname, "..", "src", "services"),
             assets: join(__dirname, "..", "src", "assets"),
         },
     },
