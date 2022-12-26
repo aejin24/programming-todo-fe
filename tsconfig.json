@@ -26,8 +26,9 @@
       "pages/*": ["./src/pages/*"],
       "assets/*": ["./src/assets/*"],
       "services/*": ["./src/services/*"],
+      "constants/*": ["./src/constants/*"]
     }
   },
-  "include": ["./src/**/*"],
+  "include": ["./src/**/*", "declarations.d.ts"],
   "exclude": ["./node_modules/**/*"]
 }

@@ -23,6 +23,7 @@ module.exports = {
             pages: join(__dirname, "..", "src", "pages"),
             services: join(__dirname, "..", "src", "services"),
             assets: join(__dirname, "..", "src", "assets"),
+            constants: join(__dirname, "..", "src", "constants"),
         },
     },
     module: {
