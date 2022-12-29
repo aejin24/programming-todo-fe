@@ -13,7 +13,7 @@ export default function Calendar({ now }: Props) {
     const dateArr = [];
 
     for (let i = 0, max = _firstDay; i < max; i++) {
-      dateArr.push(<div className={styles.date} key={`null${i}`} />);
+      dateArr.push(<div className={styles.date} style={{ cursor: "default" }} key={`null${i}`} />);
     }
 
     for (let i = 1, max = _lastDate; i <= max; i++) {
