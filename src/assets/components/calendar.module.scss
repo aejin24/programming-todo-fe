@@ -1,0 +1,33 @@
+@use "assets/scss/config/colors";
+@use "assets/scss/config/fonts";
+
+.wrapper {
+  display: flex;
+  flex-wrap: wrap;
+  margin: 0 auto;
+
+  .date {
+    width: calc(100% / 7);
+    height: 180px;
+    padding-top: 8px;
+    cursor: pointer;
+    border-top: 1px solid colors.$BLACK;
+  }
+
+  .number {
+    padding-left: 8px;
+    font: {
+      weight: 700;
+      size: 20px;
+    }
+  }
+
+  .now {
+    background-color: colors.$BEIGE;
+    border-color: colors.$RED;
+
+    .number {
+      color: colors.$RED;
+    }
+  }
+}

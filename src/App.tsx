@@ -1,11 +1,15 @@
-import { Axios } from "services/base";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
+import { RecoilRoot } from "recoil";
+import { Main } from "./pages";
 
 export default function App() {
-  async function testF() {
-    const test = await Axios.get("localIsd/sdfd");
-  }
-
-  testF();
-
-  return <div>{process.env.API_URL}</div>;
+  return (
+    <BrowserRouter>
+      <RecoilRoot>
+        <Routes>
+          <Route path="" element={<Main />} />
+        </Routes>
+      </RecoilRoot>
+    </BrowserRouter>
+  );
 }

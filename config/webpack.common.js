@@ -24,6 +24,9 @@ module.exports = {
             services: join(__dirname, "..", "src", "services"),
             assets: join(__dirname, "..", "src", "assets"),
             constants: join(__dirname, "..", "src", "constants"),
+            hooks: join(__dirname, "..", "src", "hooks"),
+            recoils: join(__dirname, "..", "src", "recoils"),
+            types: join(__dirname, "..", "src", "types"),
         },
     },
     module: {

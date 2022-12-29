@@ -1,0 +1,48 @@
+@use "assets/scss/config/colors";
+@use "assets/scss/config/fonts";
+
+.wrapper {
+  width: 100%;
+  padding: 0 24px;
+  margin: 32px 0 auto;
+
+  .day-wrapper {
+    display: flex;
+    margin-bottom: 8px;
+
+    p {
+      width: calc(100% / 7);
+      padding-bottom: 8px;
+      color: colors.$GRAY;
+
+      font: {
+        weight: 700;
+        size: 20px;
+      }
+    }
+  }
+
+  .month-wrapper {
+    display: flex;
+    align-items: center;
+    margin-bottom: 32px;
+
+    p {
+      font: {
+        weight: 700;
+        size: 42px;
+      }
+      margin-right: 12px;
+    }
+
+    button {
+      height: 30px;
+      padding: 0 8px;
+      cursor: pointer;
+      background-color: transparent;
+      border: none;
+      outline: none;
+      box-shadow: rgba(0, 0, 0, 5%) 0 6px 24px 0, rgba(0, 0, 0, 8%) 0 0 0 1px;
+    }
+  }
+}

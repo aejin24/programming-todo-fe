@@ -26,7 +26,10 @@
       "pages/*": ["./src/pages/*"],
       "assets/*": ["./src/assets/*"],
       "services/*": ["./src/services/*"],
-      "constants/*": ["./src/constants/*"]
+      "constants/*": ["./src/constants/*"],
+      "hooks/*": ["./src/hooks/*"],
+      "recoils/*": ["./src/recoils/*"],
+      "types/*": ["./src/types/*"],
     }
   },
   "include": ["./src/**/*", "declarations.d.ts"],
