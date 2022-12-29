@@ -2,9 +2,11 @@
 @use "assets/scss/config/fonts";
 
 .wrapper {
-  width: 100%;
+  width: calc(100% - 200px);
+  height: 100vh;
   padding: 0 24px;
   margin: 32px 0 auto;
+  overflow: auto;
 
   .day-wrapper {
     display: flex;
