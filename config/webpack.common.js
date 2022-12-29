@@ -43,10 +43,7 @@ module.exports = {
             },
             {
                 test: /\.(jpg|png|jpeg|gif)$/,
-                loader: "file-loader",
-                options: {
-                    name: "[name].[ext]?[hash]",
-                },
+                type: "asset/resource",
             },
         ],
     },

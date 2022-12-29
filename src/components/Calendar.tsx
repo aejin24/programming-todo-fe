@@ -1,4 +1,4 @@
-import styles from "assets/components/calendar.module.scss";
+import styles from "assets/scss/components/calendar.module.scss";
 import useDate from "hooks/useDate";
 import { Now } from "types/state";
 

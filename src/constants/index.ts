@@ -1,3 +1,14 @@
 const dayString = ["SUN", "MON", "TUE", "WEN", "THU", "FRI", "SAT"];
 
-export { dayString };
+const navArr = [
+    {
+        to: "/",
+        label: "All",
+    },
+    {
+        to: "new",
+        label: "New",
+    },
+];
+
+export { dayString, navArr };
