@@ -1,5 +1,4 @@
 @use "assets/scss/config/colors";
-@use "assets/scss/config/fonts";
 
 .wrapper {
   display: flex;
@@ -8,7 +7,7 @@
 
   .date {
     width: calc(100% / 7);
-    height: 180px;
+    height: 150px;
     padding-top: 8px;
     cursor: pointer;
     border-top: 1px solid colors.$BLACK;

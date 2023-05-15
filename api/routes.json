@@ -1,3 +1,0 @@
-{
-  "/concert/:localId": "/concert?localId=:localId"
-}

@@ -11,7 +11,7 @@ export default function Main() {
   const { moveMonth, resetNowRecoilState } = useDate();
 
   return (
-    <div className={styles.wrapper}>
+    <>
       <div className={styles["month-wrapper"]}>
         <p>{`${now.month}' ${now.year}`}</p>
 
@@ -33,6 +33,6 @@ export default function Main() {
       </div>
 
       <Calendar now={now} />
-    </div>
+    </>
   );
 }
