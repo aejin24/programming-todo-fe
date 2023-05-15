@@ -1,6 +1,6 @@
 import styles from "assets/scss/pages/main.module.scss";
-import { Calendar } from "components/index";
-import { dayString } from "constants/index";
+import { Calendar } from "components/other";
+import { dayString } from "constants/common";
 import useDate from "hooks/useDate";
 import { useRecoilValue } from "recoil";
 import { nowState } from "recoils/calendar";
