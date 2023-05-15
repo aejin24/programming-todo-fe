@@ -1,10 +1,10 @@
 import { atom } from "recoil";
-import { Now } from "types/state";
+import { TNow } from "types/common";
 
 const today = new Date();
 
-const nowState = atom<Now>({
-    key: "now",
+const nowState = atom<TNow>({
+    key: "nowAtom",
     default: {
         year: today.getFullYear(),
         month: today.getMonth() + 1,

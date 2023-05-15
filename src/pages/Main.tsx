@@ -4,10 +4,10 @@ import { dayString } from "constants/index";
 import useDate from "hooks/useDate";
 import { useRecoilValue } from "recoil";
 import { nowState } from "recoils/calendar";
-import { Now } from "types/state";
+import { TNow } from "types/common";
 
 export default function Main() {
-  const now = useRecoilValue<Now>(nowState);
+  const now = useRecoilValue<TNow>(nowState);
   const { moveMonth, resetNowRecoilState } = useDate();
 
   return (

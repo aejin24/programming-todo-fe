@@ -1,9 +1,9 @@
 import styles from "assets/scss/components/calendar.module.scss";
 import useDate from "hooks/useDate";
-import { Now } from "types/state";
+import { TNow } from "types/common";
 
 interface Props {
-  now: Now;
+  now: TNow;
 }
 
 export default function Calendar({ now }: Props) {

@@ -1,9 +1,9 @@
 import { useRecoilState, useResetRecoilState } from "recoil";
 import { nowState } from "recoils/calendar";
-import { Now } from "types/state";
+import { TNow } from "types/common";
 
 export default function useDate() {
-    const [now, setNow] = useRecoilState<Now>(nowState);
+    const [now, setNow] = useRecoilState<TNow>(nowState);
 
     // 1일이 무슨 요일인지
     const firstDay = new Date(now.year, now.month - 1, 1).getDay();
