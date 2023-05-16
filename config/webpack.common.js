@@ -27,6 +27,7 @@ module.exports = {
             hooks: join(__dirname, "..", "src", "hooks"),
             recoils: join(__dirname, "..", "src", "recoils"),
             types: join(__dirname, "..", "src", "types"),
+            utils: join(__dirname, "..", "src", "utils"),
         },
     },
     module: {

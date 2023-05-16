@@ -30,6 +30,7 @@
       "hooks/*": ["./src/hooks/*"],
       "recoils/*": ["./src/recoils/*"],
       "types/*": ["./src/types/*"],
+      "utils/*": ["./src/utils/*"]
     }
   },
   "include": ["./src/**/*", "declarations.d.ts"],
