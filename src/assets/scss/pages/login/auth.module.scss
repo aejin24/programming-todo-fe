@@ -1,0 +1,63 @@
+@use "assets/scss/config/colors";
+@use "assets/scss/mixin/fontSize";
+
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100vh;
+  background: linear-gradient(to bottom, #ff7e5f, #feb47b);
+}
+
+.text {
+  @include fontSize.fontSize(32, 700);
+  margin: 40px 0 8px;
+  color: colors.$WHITE;
+}
+
+.subtext {
+  color: colors.$WHITE;
+}
+
+.dot-falling {
+  position: relative;
+  width: 20px;
+  height: 20px;
+  border-radius: 9999px;
+  animation: dotFadeIn 0.5s infinite linear;
+  animation-delay: 0.1s;
+
+  &::before,
+  &::after {
+    position: absolute;
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    content: "";
+    border-radius: 9999px;
+  }
+
+  &::before {
+    left: -40px;
+    animation: dotFadeIn 0.5s infinite linear;
+    animation-delay: 0s;
+  }
+
+  &::after {
+    right: -40px;
+    animation: dotFadeIn 0.5s infinite linear;
+    animation-delay: 0.2s;
+  }
+}
+
+@keyframes dotFadeIn {
+  0% {
+    background-color: colors.$WHITE;
+  }
+
+  100% {
+    background-color: transparent;
+  }
+}
