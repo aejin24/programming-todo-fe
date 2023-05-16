@@ -1,4 +1,5 @@
 @use "assets/scss/config/colors";
+@use "assets/scss/mixin/fontSize";
 
 .wrapper {
   display: flex;
@@ -14,11 +15,8 @@
   }
 
   .number {
+    @include fontSize.fontSize(20, 700);
     padding-left: 8px;
-    font: {
-      weight: 700;
-      size: 20px;
-    }
   }
 
   .now {

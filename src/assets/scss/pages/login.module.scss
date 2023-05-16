@@ -1,0 +1,139 @@
+@use "assets/scss/config/colors";
+@use "assets/scss/mixin/fontSize";
+
+%input-size {
+  width: 100%;
+  height: 48px;
+  margin-bottom: 24px;
+}
+
+.wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100vh;
+  background: linear-gradient(to bottom, #ff7e5f, #feb47b);
+}
+
+.content-wrapper {
+  position: relative;
+  width: 500px;
+  padding: 48px 32px 32px;
+  background-color: rgba($color: #ffffff, $alpha: 50%);
+  border-radius: 8px;
+
+  &::after {
+    position: absolute;
+    top: -32px;
+    left: 50%;
+    display: block;
+    width: 64px;
+    height: 64px;
+    content: "";
+    background-image: url(../../images/user.png);
+    transform: translateX(-50%);
+  }
+
+  button[type="submit"] {
+    @extend %input-size;
+    margin: 20px 0 54px;
+    color: colors.$WHITE;
+    cursor: pointer;
+    background-color: colors.$RED;
+    border: none;
+    border-radius: 32px;
+  }
+}
+
+.title {
+  @include fontSize.fontSize(32, 700);
+  margin-bottom: 16px;
+  text-align: center;
+}
+
+.contour {
+  margin-bottom: 32px;
+  text-align: center;
+}
+
+.input {
+  &-container {
+    position: relative;
+
+    input {
+      @extend %input-size;
+      background-color: transparent;
+      border: none;
+
+      &:focus + .input-name span,
+      &:valid + .input-name span {
+        font-size: 14px;
+        color: colors.$GRAY;
+        transform: translateY(-50%);
+      }
+
+      &:focus + .input-name::after,
+      &:valid + .input-name::after {
+        border-color: colors.$RED;
+      }
+    }
+  }
+
+  &-name {
+    @extend %input-size;
+    position: absolute;
+    top: 0;
+    left: 0;
+    line-height: 48px;
+
+    &::after {
+      display: block;
+      width: 100%;
+      height: 100%;
+      content: "";
+      border-bottom: 1px solid colors.$BLACK;
+    }
+
+    span {
+      position: absolute;
+      display: block;
+      color: colors.$GRAY;
+      transition: all 0.3s ease;
+    }
+  }
+}
+
+.social-btn {
+  display: block;
+  width: 48px;
+  height: 48px;
+  margin: 0 auto 32px;
+  cursor: pointer;
+  background-color: colors.$WHITE;
+  border: none;
+  border-radius: 9999px;
+
+  img {
+    display: block;
+    width: 32px;
+    height: 32px;
+    margin: 0 auto;
+  }
+}
+
+.text {
+  margin-bottom: 8px;
+  font-size: 14px;
+  text-align: center;
+}
+
+.register-btn {
+  display: block;
+  margin: 0 auto;
+  font-size: 14px;
+  text-decoration: underline;
+  cursor: pointer;
+  background-color: transparent;
+  border: none;
+}

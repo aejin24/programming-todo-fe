@@ -1,18 +1,15 @@
 @use "assets/scss/config/colors";
+@use "assets/scss/mixin/fontSize";
 
 .day-wrapper {
   display: flex;
   margin-bottom: 8px;
 
   p {
+    @include fontSize.fontSize(20, 700);
     width: calc(100% / 7);
     padding-bottom: 8px;
     color: colors.$GRAY;
-
-    font: {
-      weight: 700;
-      size: 20px;
-    }
   }
 }
 
@@ -22,10 +19,7 @@
   margin-bottom: 32px;
 
   p {
-    font: {
-      weight: 700;
-      size: 42px;
-    }
+    @include fontSize.fontSize(42, 700);
     margin-right: 12px;
   }
 

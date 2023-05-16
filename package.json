@@ -1,5 +1,5 @@
 {
-  "name": "react-boilerplate",
+  "name": "coding-diary",
   "version": "1.0.0",
   "scripts": {
     "start": "webpack-dev-server --mode development --config config/webpack.dev.js",
@@ -7,15 +7,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/aejin24/react-boilerplate.git"
+    "url": "git+https://github.com/aejin24/coding-diary.git"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/aejin24/react-boilerplate/issues"
+    "url": "https://github.com/aejin24/coding-diary/issues"
   },
-  "proxy": "http://localhost:8080",
   "dependencies": {
     "axios": "^1.2.1",
     "dotenv": "^16.0.3",
