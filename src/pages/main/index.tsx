@@ -1,4 +1,4 @@
-import styles from "assets/scss/pages/main.module.scss";
+import styles from "assets/scss/pages/main/index.module.scss";
 import { Calendar } from "components/other";
 import { dayString } from "constants/common";
 import useDate from "hooks/useDate";

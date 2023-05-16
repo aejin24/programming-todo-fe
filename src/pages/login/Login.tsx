@@ -1,4 +1,4 @@
-import styles from "assets/scss/pages/login.module.scss";
+import styles from "assets/scss/pages/login/login.module.scss";
 import githubImage from "assets/images/github.png";
 
 export default function Login() {

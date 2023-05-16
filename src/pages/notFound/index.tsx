@@ -1,5 +1,5 @@
 import img from "assets/images/404.png";
-import styles from "assets/scss/pages/error.module.scss";
+import styles from "assets/scss/pages/notFound/index.module.scss";
 import { Link } from "react-router-dom";
 
 export default function NotFound() {
