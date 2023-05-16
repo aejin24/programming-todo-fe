@@ -1,13 +1,17 @@
 import { Route, Routes } from "react-router-dom";
 
 import { Skeleton } from "components/other";
-import { Error, Login, Main, New } from "./pages";
+import Main from "pages/main";
+import New from "pages/new";
+import NotFound from "pages/notFound";
+import { Auth, Login } from "pages/login";
 import PrivateRoute from "utils/PrivateRoute";
 
 export default function App() {
   return (
     <Routes>
-      <Route path="login" element={<Login />} />
+      <Route path="/login" element={<Login />} />
+      <Route path="/auth/*" element={<Auth />} />
 
       <Route
         element={
@@ -17,10 +21,10 @@ export default function App() {
         }
       >
         <Route index element={<Main />} />
-        <Route path="new" element={<New />} />
+        <Route path="/new" element={<New />} />
       </Route>
 
-      <Route path="*" element={<Error />} />
+      <Route path="*" element={<NotFound />} />
     </Routes>
   );
 }
