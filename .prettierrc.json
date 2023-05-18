@@ -5,18 +5,5 @@
   "singleQuote": false,
   "htmlWhitespaceSensitivity": "css",
   "endOfLine": "auto",
-  "overrides": [
-    {
-      "files": ["**/*.html", "**/*.css", "**/*.scss", "**/*.jsx", "**/*.tsx"],
-      "options": {
-        "tabWidth": 2
-      }
-    },
-    {
-      "files": ["**/*.js", "**/*.ts"],
-      "options": {
-          "tabWidth": 4
-      }
-    }
-  ]
+  "tabWidth": 2
 }
