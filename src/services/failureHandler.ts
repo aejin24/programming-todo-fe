@@ -1,16 +1,12 @@
 import { AxiosError } from "axios";
-
-const statusMap: Record<number | string, string> = {
-    404: "존재하지 않는 경로입니다.",
-    default: "알 수 없는 오류가 발생했습니다.",
-};
+import { ErrorCode, ErrorMessage } from "constants/errorCode";
 
 export default function failureHandler(e: unknown) {
     if (e instanceof AxiosError) {
-        const status = e.response?.status;
+        const status = e.response?.data.status;
 
-        return Error(statusMap[status || "default"]);
+        return new Error(ErrorMessage[status || ErrorCode.INTERNAL_SERVER_ERROR]);
     }
 
-    return Error(statusMap.default);
+    return new Error(ErrorMessage[ErrorCode.INTERNAL_SERVER_ERROR]);
 }

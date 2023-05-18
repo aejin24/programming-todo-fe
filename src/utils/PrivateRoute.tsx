@@ -1,7 +1,10 @@
 import { Navigate } from "react-router-dom";
 
 export default function PrivateRoute({ children }: { children: JSX.Element }) {
-  const accessToken = sessionStorage.getItem("access_token");
+  const accessToken = sessionStorage.getItem("token");
+  const isRegister = sessionStorage.getItem("isRegister");
 
-  return !accessToken || accessToken === "" ? <Navigate to="/login" /> : children;
+  const isValid = accessToken && isRegister;
+
+  return isValid ? children : <Navigate to="/login" />;
 }
