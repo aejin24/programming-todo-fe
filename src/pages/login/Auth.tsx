@@ -19,7 +19,7 @@ export default function Auth() {
       {
         onSuccess: (res) => {
           sessionStorage.setItem("token", res.token);
-          navigate("/login", { state: { mode: "register" } });
+          navigate("/");
         },
         onError: (error) => {
           // TO-BE

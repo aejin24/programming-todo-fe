@@ -9,33 +9,11 @@ export default function Login() {
   return (
     <div className={styles.wrapper}>
       <div className={styles["content-wrapper"]}>
-        <p className={styles.title}>Sign In</p>
-
-        <div className={styles["input-container"]}>
-          <input type="text" id="email" required />
-          <label className={styles["input-name"]} htmlFor="email">
-            <span>Email</span>
-          </label>
-        </div>
-
-        <div className={styles["input-container"]}>
-          <input type="password" id="password" required />
-          <label className={styles["input-name"]} htmlFor="password">
-            <span>Password</span>
-          </label>
-        </div>
-
-        <button type="submit">Login</button>
-
-        <p className={styles.contour}>OR</p>
+        <p className={styles.title}>Coding Diary</p>
 
         <button type="button" className={styles["social-btn"]} onClick={handleGithubLogin}>
           <img src={githubImage} alt="github" />
-        </button>
-
-        <p className={styles.text}>회원이 아니신가요?</p>
-        <button type="button" className={styles["register-btn"]}>
-          회원가입
+          깃허브 로그인
         </button>
       </div>
     </div>
