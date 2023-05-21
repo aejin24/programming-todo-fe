@@ -1,7 +1,7 @@
 import { useMutation, useQuery } from "@tanstack/react-query";
 
 import queryKey from "constants/queryKey";
-import { checkHistory, githubLogin, githubUserInfo } from "services/auth";
+import { checkRegister, githubLogin, githubUserInfo } from "services/auth";
 import { getSessionStorage } from "utils/storage";
 
 export default function useAuthFetch() {
@@ -20,7 +20,7 @@ export default function useAuthFetch() {
   });
 
   // 이력 확인
-  const { mutate: checkHistoryMutate } = useMutation(checkHistory);
+  const { mutate: checkHistoryMutate } = useMutation(checkRegister);
 
   return {
     githubMutate,

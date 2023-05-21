@@ -1,4 +1,4 @@
-import { TCheckHistory, TGithubLoginRes, TGithubUserInfo } from "types/auth";
+import { TCheckRegister, TGithubLoginRes, TGithubUserInfo } from "types/auth";
 import { TAxiosReturn } from "types/common";
 import { getSessionStorage } from "utils/storage";
 import { Axios } from "./base";
@@ -19,8 +19,8 @@ export const githubUserInfo = async (): Promise<TGithubUserInfo> => {
   return data;
 };
 
-export const checkHistory = async ({ id, email, name, repository }: TCheckHistory): Promise<{ list: [] }> => {
-  const { data } = await Axios.post<TAxiosReturn<{ list: [] }>>("/api/auth/history", { id, email, name, repository });
+export const checkRegister = async ({ id, email, name, repository }: TCheckRegister): Promise<{ list: [] }> => {
+  const { data } = await Axios.post<TAxiosReturn<{ list: [] }>>("/api/auth/register", { id, email, name, repository });
 
   return data.data;
 };

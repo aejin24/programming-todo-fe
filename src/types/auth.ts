@@ -21,7 +21,7 @@ export type TGithubUserInfo = {
   updated_at: string;
 };
 
-export type TCheckHistory = {
+export type TCheckRegister = {
   id: number;
   email: string;
   name: string;
