@@ -24,6 +24,8 @@ export default function App() {
         <Route path="/new" element={<New />} />
       </Route>
 
+      <Route path="/mypage" element={<div>mypage</div>} />
+
       <Route path="*" element={<NotFound />} />
     </Routes>
   );

@@ -1,5 +1,7 @@
-export const setSessionStorage = (name: string, value: string) => sessionStorage.setItem(name, value);
+export const setSessionStorage = (key: string, value: string) => sessionStorage.setItem(key, value);
 
-export const getSessionStorage = (name: string) => {
-  return sessionStorage.getItem(name);
+export const getSessionStorage = (key: string) => {
+  return sessionStorage.getItem(key);
 };
+
+export const removeSessionStorage = (key: string) => sessionStorage.removeItem(key);
