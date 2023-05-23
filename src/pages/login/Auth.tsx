@@ -1,6 +1,8 @@
 import styles from "assets/scss/pages/login/auth.module.scss";
 import { useEffect } from "react";
 import { useLocation, useNavigate, useSearchParams } from "react-router-dom";
+import { useSetRecoilState } from "recoil";
+import { userInfoState } from "recoils/auth";
 
 import { setSessionStorage } from "utils/storage";
 import useAuthFetch from "./useAuthFetch";
@@ -13,6 +15,8 @@ export default function Auth() {
 
   const [searchParam] = useSearchParams();
   const code = searchParam.get("code") || "";
+
+  const setUserInfo = useSetRecoilState(userInfoState);
 
   // TO-BE: error handling
   const { githubMutate, checkHistoryMutate, userInfo, getUserInfoError, isGetUserInfoError } = useAuthFetch();
@@ -45,10 +49,17 @@ export default function Auth() {
           repository: userInfo.html_url,
         },
         {
-          // TO-BE: success/error handling
-          onSuccess: (res) => {
+          onSuccess: () => {
+            setUserInfo({
+              id: userInfo.id,
+              email: userInfo.email,
+              name: userInfo.name,
+              repository: userInfo.html_url,
+            });
+
             navigate("/");
           },
+          // TO-BE: error handling
           onError: () => {
             navigate(-1);
           },

@@ -3,7 +3,7 @@ import { Calendar } from "components/other";
 import { dayString } from "constants/common";
 import useDate from "hooks/useDate";
 import { useRecoilValue } from "recoil";
-import { nowState } from "recoils/calendar";
+import { nowState } from "recoils/common";
 import { TNow } from "types/common";
 
 export default function Main() {
