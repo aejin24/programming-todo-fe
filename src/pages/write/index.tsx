@@ -8,7 +8,7 @@ import styles from "assets/scss/pages/write/index.module.scss";
 import { Dropdown } from "components/menu";
 import { Link } from "react-router-dom";
 
-export default function New() {
+export default function Write() {
   const [active, setActive] = useState("-- 선택 --");
   const [isVisible, setIsVisible] = useState(false);
 
