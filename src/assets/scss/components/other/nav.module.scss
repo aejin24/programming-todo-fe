@@ -22,11 +22,11 @@
 
   .selected {
     font-weight: 700;
-    color: colors.$RED;
+    color: colors.$ORANGE;
 
     svg,
     svg > image {
-      fill: colors.$RED;
+      fill: colors.$ORANGE;
     }
   }
 }

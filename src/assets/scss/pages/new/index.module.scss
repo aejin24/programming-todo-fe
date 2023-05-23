@@ -1,0 +1,152 @@
+@use "assets/scss/config/colors";
+@use "assets/scss/mixin/fontSize";
+
+%dropdown-btn {
+  width: 200px;
+  height: 36px;
+  padding: 0 16px;
+  font-size: 14px;
+  text-align: left;
+  cursor: pointer;
+  background-color: colors.$WHITE;
+  border: none;
+}
+
+.input-wrapper {
+  display: flex;
+  min-height: 36px;
+  margin-bottom: 16px;
+  line-height: 36px;
+
+  .label {
+    width: 120px;
+    margin-right: 8px;
+    font-size: 14px;
+
+    &::before {
+      margin-right: 2px;
+      color: colors.$RED;
+      content: "*";
+    }
+  }
+
+  &:nth-last-child(2) {
+    .label + *:not(input[type="date"]) {
+      width: calc(100% - 120px);
+    }
+  }
+}
+
+.date {
+  width: 200px;
+  padding: 0 16px;
+  font-size: 14px;
+  border: 1px solid colors.$GRAY3;
+  border-radius: 8px;
+
+  &::-webkit-calendar-picker-indicator {
+    width: 15px;
+    height: 15px;
+    background: {
+      image: url(../../../images/calendar.png);
+      size: contain;
+      repeat: no-repeat;
+    }
+    cursor: pointer;
+  }
+
+  &::before {
+    width: 100%;
+    content: attr(data-placeholder);
+  }
+
+  &:valid::before {
+    display: none;
+  }
+}
+
+.dropdown {
+  &-wrapper {
+    position: relative;
+  }
+
+  &-btn {
+    @extend %dropdown-btn;
+    border: 1px solid colors.$GRAY3;
+    border-radius: 8px;
+
+    &::after {
+      float: right;
+      content: "\25BC";
+    }
+  }
+
+  &-items {
+    position: absolute;
+    top: 44px;
+    z-index: 9999;
+    display: flex;
+    flex-direction: column;
+    width: 200px;
+
+    button {
+      @extend %dropdown-btn;
+
+      &:hover {
+        background-color: colors.$BEIGE;
+      }
+
+      &:first-of-type {
+        border: 1px solid colors.$GRAY3;
+        border-radius: 8px 8px 0 0;
+      }
+
+      &:nth-of-type(n + 2) {
+        border: 1px solid colors.$GRAY3;
+        border-top: none;
+      }
+
+      &:last-of-type {
+        border: 1px solid colors.$GRAY3;
+        border: {
+          top: none;
+          radius: 0 0 8px 8px;
+        }
+      }
+    }
+  }
+}
+
+.btn-wrapper {
+  display: flex;
+  align-items: center;
+  justify-items: center;
+  width: fit-content;
+  height: 48px;
+  margin: 32px auto 0;
+}
+
+.cancel,
+.register {
+  width: 150px;
+  height: 48px;
+  cursor: pointer;
+  border: none;
+  border-radius: 8px;
+}
+
+.cancel {
+  margin-right: 12px;
+  line-height: 48px;
+  color: colors.$BLACK;
+  background-color: colors.$BEIGE;
+  text: {
+    align: center;
+    decoration: none;
+  }
+}
+
+.register {
+  color: colors.$WHITE;
+  background-color: colors.$ORANGE;
+}
