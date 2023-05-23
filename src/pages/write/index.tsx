@@ -4,7 +4,7 @@ import { useState } from "react";
 import "@toast-ui/editor/dist/toastui-editor.css";
 import { Editor } from "@toast-ui/react-editor";
 
-import styles from "assets/scss/pages/new/index.module.scss";
+import styles from "assets/scss/pages/write/index.module.scss";
 import { Dropdown } from "components/menu";
 import { Link } from "react-router-dom";
 

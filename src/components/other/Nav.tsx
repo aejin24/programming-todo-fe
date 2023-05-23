@@ -1,5 +1,5 @@
 import styles from "assets/scss/components/other/nav.module.scss";
-import { AllIcon, NewIcon } from "assets/svgs";
+import { AllIcon, WriteIcon } from "assets/svgs";
 import { NavLink } from "react-router-dom";
 
 export default function Nav() {
@@ -9,8 +9,8 @@ export default function Nav() {
         <AllIcon />
         전체
       </NavLink>
-      <NavLink to="/new" className={({ isActive }) => (isActive ? styles.selected : undefined)}>
-        <NewIcon />
+      <NavLink to="/write" className={({ isActive }) => (isActive ? styles.selected : undefined)}>
+        <WriteIcon />
         작성
       </NavLink>
     </nav>
