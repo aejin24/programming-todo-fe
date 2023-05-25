@@ -19,7 +19,7 @@ export default function Auth() {
   const setUserInfo = useSetRecoilState(userInfoState);
 
   // TO-BE: error handling
-  const { githubMutate, checkHistoryMutate, userInfo, getUserInfoError, isGetUserInfoError } = useAuthFetch();
+  const { githubMutate, checkRegisterMutate, userInfo, getUserInfoError, isGetUserInfoError } = useAuthFetch();
 
   useEffect(() => {
     if (!hasHistoryPath) {
@@ -41,12 +41,13 @@ export default function Auth() {
 
   useEffect(() => {
     if (userInfo) {
-      checkHistoryMutate(
+      checkRegisterMutate(
         {
           id: userInfo.id,
           email: userInfo.email,
           name: userInfo.name,
           repository: userInfo.html_url,
+          login: userInfo.login,
         },
         {
           onSuccess: () => {
@@ -55,6 +56,7 @@ export default function Auth() {
               email: userInfo.email,
               name: userInfo.name,
               repository: userInfo.html_url,
+              login: userInfo.login,
             });
 
             navigate("/");
@@ -66,7 +68,7 @@ export default function Auth() {
         }
       );
     }
-  }, [userInfo, checkHistoryMutate, navigate]);
+  }, [userInfo, checkRegisterMutate, navigate]);
 
   return (
     <div className={styles.wrapper}>

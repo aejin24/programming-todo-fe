@@ -26,4 +26,5 @@ export type TCheckRegister = {
   email: string;
   name: string;
   repository: string;
+  login: string;
 };

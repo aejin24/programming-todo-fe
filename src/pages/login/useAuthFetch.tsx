@@ -20,11 +20,11 @@ export default function useAuthFetch() {
   });
 
   // 이력 확인
-  const { mutate: checkHistoryMutate } = useMutation(checkRegister);
+  const { mutate: checkRegisterMutate } = useMutation(checkRegister);
 
   return {
     githubMutate,
-    checkHistoryMutate,
+    checkRegisterMutate,
     userInfo,
     getUserInfoError,
     isGetUserInfoError,

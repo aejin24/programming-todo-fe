@@ -9,6 +9,7 @@ const userInfoState = atom<TCheckRegister>({
     email: "",
     name: "",
     repository: "",
+    login: "",
   },
   effects: [
     ({ setSelf, onSet }) => {

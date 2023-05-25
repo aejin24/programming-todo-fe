@@ -19,12 +19,19 @@ export const githubUserInfo = async (): Promise<TGithubUserInfo> => {
   return data;
 };
 
-export const checkRegister = async ({ id, email, name, repository }: TCheckRegister): Promise<{ result: boolean }> => {
+export const checkRegister = async ({
+  id,
+  email,
+  name,
+  repository,
+  login,
+}: TCheckRegister): Promise<{ result: boolean }> => {
   const { data } = await Axios.post<TAxiosReturn<{ result: boolean }>>("/api/auth/register", {
     id,
     email,
     name,
     repository,
+    login,
   });
 
   return data.data;
