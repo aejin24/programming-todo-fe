@@ -1,5 +1,6 @@
-import { TCheckRegister, TGithubLoginRes, TGithubUserInfo } from "types/auth";
+import { TCheckRegister, TGithubLoginRes } from "types/auth";
 import { TAxiosReturn } from "types/common";
+import { TGithubUserInfo } from "types/github";
 import { getSessionStorage } from "utils/storage";
 import { Axios } from "./base";
 

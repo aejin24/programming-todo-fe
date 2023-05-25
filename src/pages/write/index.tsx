@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { Link } from "react-router-dom";
 
 // eslint-disable-next-line import/no-extraneous-dependencies
 import "@toast-ui/editor/dist/toastui-editor.css";
@@ -6,11 +7,16 @@ import { Editor } from "@toast-ui/react-editor";
 
 import styles from "assets/scss/pages/write/index.module.scss";
 import { Dropdown } from "components/menu";
-import { Link } from "react-router-dom";
+import { useQuery } from "@tanstack/react-query";
+import queryKey from "constants/queryKey";
+import { getGithubRepos } from "services/write";
 
 export default function Write() {
   const [active, setActive] = useState("-- 선택 --");
   const [isVisible, setIsVisible] = useState(false);
+
+  // TO-BE: error handling
+  const { data, isError, error, isLoading } = useQuery([queryKey.GET_GITHUB_REPOS], getGithubRepos);
 
   return (
     <>
@@ -28,9 +34,9 @@ export default function Write() {
               {active}
             </Dropdown.DropdownButton>
             <Dropdown.DropdownItems className={styles["dropdown-items"]}>
-              <Dropdown.DropdownItem>repo1</Dropdown.DropdownItem>
-              <Dropdown.DropdownItem>repo2</Dropdown.DropdownItem>
-              <Dropdown.DropdownItem>repo3</Dropdown.DropdownItem>
+              {data?.map((repo) => (
+                <Dropdown.DropdownItem key={repo.id}>{repo.name}</Dropdown.DropdownItem>
+              ))}
             </Dropdown.DropdownItems>
           </Dropdown>
         </div>
