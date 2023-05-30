@@ -1,9 +1,12 @@
 import "assets/scss/index.scss";
+
 import ReactDOM from "react-dom/client";
 import App from "./App";
 import { BrowserRouter } from "react-router-dom";
 import { RecoilRoot } from "recoil";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+
+import GlobalModal from "components/modal/GlobalModal";
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -19,7 +22,9 @@ root.render(
   <BrowserRouter>
     <QueryClientProvider client={queryClient}>
       <RecoilRoot>
-        <App />
+        <GlobalModal>
+          <App />
+        </GlobalModal>
       </RecoilRoot>
     </QueryClientProvider>
   </BrowserRouter>
