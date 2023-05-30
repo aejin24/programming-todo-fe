@@ -2,18 +2,18 @@ import React, { createContext, HTMLAttributes, PropsWithChildren, useContext, us
 
 type TDropdownContextProps = {
   onChange: (selected: string) => void;
-  isVisible: boolean;
+  isOpen: boolean;
 };
 
 const DropdownContext = createContext<TDropdownContextProps>({
   onChange: () => {},
-  isVisible: false,
+  isOpen: false,
 });
 
-export default function Dropdown({ onChange, isVisible, children }: TDropdownContextProps & PropsWithChildren) {
+export default function Dropdown({ onChange, isOpen, children }: TDropdownContextProps & PropsWithChildren) {
   const value = useMemo(() => {
-    return { onChange, isVisible };
-  }, [onChange, isVisible]);
+    return { onChange, isOpen };
+  }, [onChange, isOpen]);
 
   return <DropdownContext.Provider value={value}>{children}</DropdownContext.Provider>;
 }
@@ -27,9 +27,9 @@ function DropdownButton({ children, ...props }: PropsWithChildren & HTMLAttribut
 }
 
 function DropdownItems({ children, ...props }: PropsWithChildren & HTMLAttributes<HTMLDivElement>) {
-  const { isVisible } = useContext(DropdownContext);
+  const { isOpen } = useContext(DropdownContext);
 
-  return isVisible ? <div {...props}>{children}</div> : null;
+  return isOpen ? <div {...props}>{children}</div> : null;
 }
 
 function DropdownItem({ children, ...props }: PropsWithChildren & HTMLAttributes<HTMLButtonElement>) {
