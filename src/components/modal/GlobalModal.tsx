@@ -1,23 +1,7 @@
-import { createContext, PropsWithChildren, useState } from "react";
+import { PropsWithChildren, useState } from "react";
+
 import { modalList } from "utils/modal";
-
-type TGlobalModalContextProps = {
-  show: (type: number, props?: {}) => void;
-  hide: () => void;
-  store: {
-    type: number;
-    props: {};
-  };
-};
-
-export const GlobalModalContext = createContext<TGlobalModalContextProps>({
-  show: () => {},
-  hide: () => {},
-  store: {
-    type: 0,
-    props: {},
-  },
-});
+import GlobalModalContext from "context/globalModal";
 
 export default function GlobalModal({ children }: PropsWithChildren) {
   const [store, setStore] = useState({

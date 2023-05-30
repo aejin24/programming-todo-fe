@@ -1,5 +1,6 @@
 import { useContext } from "react";
-import { GlobalModalContext } from "components/modal/GlobalModal";
+
+import GlobalModalContext from "context/globalModal";
 
 export default function useGlobalModalContext() {
   return useContext(GlobalModalContext);

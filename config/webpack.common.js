@@ -28,6 +28,7 @@ module.exports = {
       recoils: join(__dirname, "..", "src", "recoils"),
       types: join(__dirname, "..", "src", "types"),
       utils: join(__dirname, "..", "src", "utils"),
+      context: join(__dirname, "..", "src", "context"),
     },
   },
   module: {
