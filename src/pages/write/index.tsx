@@ -1,22 +1,22 @@
-import { useEffect, useRef, useState } from "react";
-import { Link } from "react-router-dom";
-
 // eslint-disable-next-line import/no-extraneous-dependencies
 import "@toast-ui/editor/dist/toastui-editor.css";
 import { Editor } from "@toast-ui/react-editor";
 
-import { useQuery } from "@tanstack/react-query";
-
 import styles from "assets/scss/pages/write/index.module.scss";
 
+import { useEffect, useRef, useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import { useRecoilValue } from "recoil";
+
+import { userInfoState } from "recoils/auth";
 import { Dropdown } from "components/menu";
-import queryKey from "constants/queryKey";
-import { getGithubRepos } from "services/write";
-import useGlobalModalContext from "hooks/useGlobalModalContext";
 import { ModalType } from "utils/modal";
+import useGlobalModalContext from "hooks/useGlobalModalContext";
+import useDate from "hooks/useDate";
+import useWriteApi from "./useWriteApi";
 
 export default function Write() {
-  const [active, setActive] = useState("-- 선택 --");
+  const [repository, setRepository] = useState("-- 선택 --");
   const [isOpen, setIsOpen] = useState(false);
 
   const { show, hide } = useGlobalModalContext();
@@ -25,18 +25,24 @@ export default function Write() {
   const editerRef = useRef<any>(null);
 
   // TO-BE: error handling
-  const { data, isError, error, isLoading, isFetching } = useQuery([queryKey.GET_GITHUB_REPOS], getGithubRepos);
+  const { repositoryList, createPlanMutate, isError, error, isLoading } = useWriteApi();
+
+  const { today } = useDate();
+
+  const { id } = useRecoilValue(userInfoState);
+
+  const navigate = useNavigate();
 
   useEffect(() => {
-    if (isLoading || isFetching) {
+    if (isLoading) {
       show(ModalType.LOADING);
     } else {
       hide();
     }
-  }, [isLoading, isFetching]);
+  }, [isLoading]);
 
   const handleSubmitBtn = async () => {
-    if (active === "-- 선택 --") {
+    if (repository === "-- 선택 --") {
       show(ModalType.ALERT, { text: "레포지토리를 선택해주세요!" });
 
       return;
@@ -53,6 +59,21 @@ export default function Write() {
 
       return;
     }
+
+    createPlanMutate(
+      {
+        content: editerRef.current.getInstance().getHTML(),
+        member_id: id,
+        register_date: dateRef.current.value,
+        repository,
+      },
+      {
+        onSuccess: () => {
+          hide();
+          navigate("/");
+        },
+      }
+    );
   };
 
   return (
@@ -63,15 +84,15 @@ export default function Write() {
           <Dropdown
             isOpen={isOpen}
             onChange={(activeText) => {
-              setActive(activeText);
+              setRepository(activeText);
               setIsOpen(!isOpen);
             }}
           >
             <Dropdown.DropdownButton className={styles["dropdown-btn"]} onClick={() => setIsOpen(!isOpen)}>
-              {active}
+              {repository}
             </Dropdown.DropdownButton>
             <Dropdown.DropdownItems className={styles["dropdown-items"]}>
-              {data?.map((repo) => (
+              {repositoryList?.map((repo) => (
                 <Dropdown.DropdownItem key={repo.id}>{repo.name}</Dropdown.DropdownItem>
               ))}
             </Dropdown.DropdownItems>
@@ -81,7 +102,15 @@ export default function Write() {
 
       <div className={styles["input-wrapper"]}>
         <p className={styles.label}>날짜</p>
-        <input type="date" name="date" data-placeholder="날짜 선택" className={styles.date} required ref={dateRef} />
+        <input
+          min={today}
+          type="date"
+          name="date"
+          data-placeholder="날짜 선택"
+          className={styles.date}
+          required
+          ref={dateRef}
+        />
       </div>
 
       <div className={styles["input-wrapper"]}>

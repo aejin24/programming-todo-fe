@@ -5,6 +5,8 @@ import { TNow } from "types/common";
 export default function useDate() {
   const [now, setNow] = useRecoilState<TNow>(nowState);
 
+  const today = new Date().toISOString().slice(0, -14);
+
   // 1일이 무슨 요일인지
   const firstDay = new Date(now.year, now.month - 1, 1).getDay();
 
@@ -30,5 +32,5 @@ export default function useDate() {
   // 오늘 날짜 이동하기 위한 상태값 초기화
   const resetNowRecoilState = useResetRecoilState(nowState);
 
-  return { firstDay, lastDate, moveDate, moveMonth, resetNowRecoilState };
+  return { firstDay, lastDate, today, moveDate, moveMonth, resetNowRecoilState };
 }
