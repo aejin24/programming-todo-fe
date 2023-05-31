@@ -1,0 +1,77 @@
+@use "assets/scss/config/colors";
+
+.wrapper {
+  position: absolute;
+  top: 80px;
+  right: 0;
+  z-index: 9999;
+  display: flex;
+  align-items: center;
+  width: fit-content;
+  height: 80px;
+  padding: 0 16px;
+  background-color: colors.$ORANGE2;
+  border-top-left-radius: 8px;
+  transition: all 0.3s;
+  animation: {
+    fill-mode: forwards;
+    /* stylelint-disable-next-line value-keyword-case */
+    name: drawerInAni, drawerOutAni;
+    delay: 0s, 4s;
+    duration: 1s, 1s;
+    timing-function: ease-in, ease-in-out;
+  }
+
+  &::after {
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    display: block;
+    width: 100%;
+    height: 2px;
+    content: "";
+    background-color: colors.$RED;
+    transition: all 0.3s;
+    animation: progressAni 3s forwards linear;
+    animation-delay: 1s;
+  }
+
+  img {
+    width: 30px;
+    margin-right: 8px;
+  }
+}
+
+@keyframes drawerInAni {
+  0% {
+    transform: translateX(300px);
+  }
+
+  100% {
+    transform: translateX(0);
+  }
+}
+
+@keyframes drawerOutAni {
+  0% {
+    transform: translateX(0);
+  }
+
+  100% {
+    transform: translateX(300px);
+  }
+}
+
+@keyframes progressAni {
+  0% {
+    width: 100%;
+  }
+
+  50% {
+    width: 50%;
+  }
+
+  100% {
+    width: 0%;
+  }
+}

@@ -1,7 +1,8 @@
 import { PropsWithChildren, useState } from "react";
 
-import { modalList } from "utils/modal";
 import GlobalModalContext from "context/globalModal";
+import { modalList } from "utils/modal";
+import { sleep } from "utils/common";
 
 export default function GlobalModal({ children }: PropsWithChildren) {
   const [store, setStore] = useState({
@@ -9,15 +10,27 @@ export default function GlobalModal({ children }: PropsWithChildren) {
     props: {},
   });
 
-  const show = (type: number, props?: {}) => {
+  const show = async (type: number, props?: {}) => {
     setStore({
+      ...store,
       type,
       props: props || {},
     });
+
+    if (type === 2) {
+      await sleep(5000);
+
+      setStore({
+        ...store,
+        type: 0,
+        props: {},
+      });
+    }
   };
 
   const hide = () => {
     setStore({
+      ...store,
       type: 0,
       props: {},
     });

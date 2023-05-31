@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Link } from "react-router-dom";
 
 // eslint-disable-next-line import/no-extraneous-dependencies
@@ -21,6 +21,9 @@ export default function Write() {
 
   const { show, hide } = useGlobalModalContext();
 
+  const dateRef = useRef<HTMLInputElement>(null);
+  const editerRef = useRef<any>(null);
+
   // TO-BE: error handling
   const { data, isError, error, isLoading, isFetching } = useQuery([queryKey.GET_GITHUB_REPOS], getGithubRepos);
 
@@ -31,6 +34,26 @@ export default function Write() {
       hide();
     }
   }, [isLoading, isFetching]);
+
+  const handleSubmitBtn = async () => {
+    if (active === "-- 선택 --") {
+      show(ModalType.ALERT, { text: "레포지토리를 선택해주세요!" });
+
+      return;
+    }
+
+    if (!dateRef.current?.value) {
+      show(ModalType.ALERT, { text: "날짜를 선택해주세요!" });
+
+      return;
+    }
+
+    if (editerRef.current.getInstance().getHTML() === "<p><br></p>") {
+      show(ModalType.ALERT, { text: "할 일을 입력해주세요!" });
+
+      return;
+    }
+  };
 
   return (
     <>
@@ -58,17 +81,18 @@ export default function Write() {
 
       <div className={styles["input-wrapper"]}>
         <p className={styles.label}>날짜</p>
-        <input type="date" name="date" data-placeholder="날짜 선택" className={styles.date} required />
+        <input type="date" name="date" data-placeholder="날짜 선택" className={styles.date} required ref={dateRef} />
       </div>
 
       <div className={styles["input-wrapper"]}>
         <p className={styles.label}>할 일</p>
         <Editor
-          placeholder="내용을 입력해주세요."
+          placeholder="할 일을 입력해주세요."
           autofocus={false}
           previewStyle="vertical"
           hideModeSwitch
           useCommandShortcut={false}
+          ref={editerRef}
         />
       </div>
 
@@ -76,7 +100,9 @@ export default function Write() {
         <Link to="/" className={styles.cancel}>
           취소
         </Link>
-        <button className={styles.register}>신규 등록</button>
+        <button className={styles.register} onClick={handleSubmitBtn}>
+          신규 등록
+        </button>
       </div>
     </>
   );
