@@ -1,0 +1,69 @@
+@use "assets/scss/config/colors";
+@use "assets/scss/mixin/fontSize";
+
+.wrapper {
+  position: absolute;
+  top: 0;
+  z-index: 9999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100vh;
+  background-color: rgba($color: #000000, $alpha: 30%);
+}
+
+.modal {
+  width: 360px;
+  height: fit-content;
+  padding: 32px;
+  background-color: colors.$WHITE;
+  border-radius: 8px;
+  animation: fadeInDown 0.3s;
+}
+
+.title {
+  @include fontSize.fontSize(28, 700);
+  margin-bottom: 8px;
+}
+
+.subtitle {
+  @include fontSize.fontSize(18, 400);
+  margin-bottom: 16px;
+}
+
+.btn-wrapper {
+  float: right;
+
+  button {
+    width: 100px;
+    height: 40px;
+    margin-left: 8px;
+    cursor: pointer;
+    border-radius: 8px;
+  }
+}
+
+.cancel {
+  color: colors.$GRAY;
+  background-color: colors.$WHITE;
+  border: 1px solid colors.$GRAY;
+}
+
+.submit {
+  color: colors.$WHITE;
+  background-color: colors.$ORANGE;
+  border: none;
+}
+
+@keyframes fadeInDown {
+  0% {
+    opacity: 0;
+    transform: translate3d(0, -100%, 0);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateZ(0);
+  }
+}
