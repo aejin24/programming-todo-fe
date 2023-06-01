@@ -16,24 +16,24 @@
 .modal {
   width: 360px;
   height: fit-content;
-  padding: 32px;
+  padding: 24px;
   background-color: colors.$WHITE;
   border-radius: 8px;
   animation: fadeInDown 0.3s;
 }
 
 .title {
-  @include fontSize.fontSize(28, 700);
+  @include fontSize.fontSize(20, 700);
   margin-bottom: 8px;
 }
 
 .subtitle {
   @include fontSize.fontSize(18, 400);
-  margin-bottom: 16px;
 }
 
 .btn-wrapper {
   float: right;
+  margin-top: 16px;
 
   button {
     width: 100px;

@@ -64,21 +64,34 @@ export default function Write() {
       return;
     }
 
-    createPlanMutate(
-      {
-        content: editerRef.current.getInstance().getHTML(),
-        member_id: id,
-        register_date: dateRef.current.value,
-        repository,
+    show(ModalType.DIALOG, {
+      type: "SUBMIT",
+      title: "신규 등록을 하시겠습니까?",
+      cancelText: "취소",
+      submitText: "등록",
+      handleCancelBtnClick: () => hide(),
+      handleSubmitBtnClick: () => {
+        createPlanMutate(
+          {
+            content: editerRef.current.getInstance().getHTML(),
+            member_id: id,
+            register_date: dateRef.current!.value,
+            repository,
+          },
+          {
+            onSuccess: () => {
+              hide();
+              queryClient.resetQueries([
+                queryKey.GET_PLANS,
+                new Date(dateRef.current!.value).getFullYear(),
+                new Date(dateRef.current!.value).getMonth() + 1,
+              ]);
+              navigate("/");
+            },
+          }
+        );
       },
-      {
-        onSuccess: () => {
-          hide();
-          queryClient.resetQueries([queryKey.GET_PLANS, new Date(dateRef.current!.value).getMonth() + 1]);
-          navigate("/");
-        },
-      }
-    );
+    });
   };
 
   return (
