@@ -9,7 +9,7 @@ import { dayString } from "constants/common";
 import queryKey from "constants/queryKey";
 import useDate from "hooks/useDate";
 import { userInfoState } from "recoils/auth";
-import { getHistories } from "services/main";
+import { getPlans } from "services/main";
 import { ModalType } from "utils/modal";
 import useGlobalModalContext from "hooks/useGlobalModalContext";
 
@@ -19,8 +19,8 @@ export default function Main() {
   const { id } = useRecoilValue(userInfoState);
 
   // TO-BE: error handling
-  const { data, isLoading, isFetching, isError, error } = useQuery([queryKey.GET_HISTORIES, now.year, now.month], () =>
-    getHistories(id, now.year, now.month)
+  const { data, isLoading, isFetching, isError, error } = useQuery([queryKey.GET_PLANS, now.year, now.month], () =>
+    getPlans(id, now.year, now.month)
   );
 
   const { show, hide } = useGlobalModalContext();
