@@ -74,7 +74,7 @@ export default function Write() {
       {
         onSuccess: () => {
           hide();
-          queryClient.resetQueries([queryKey.GET_HISTORIES, new Date(dateRef.current!.value).getMonth() + 1]);
+          queryClient.resetQueries([queryKey.GET_PLANS, new Date(dateRef.current!.value).getMonth() + 1]);
           navigate("/");
         },
       }
