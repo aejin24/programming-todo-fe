@@ -1,26 +1,21 @@
 @use "assets/scss/config/colors";
 
 .wrapper {
-  position: absolute;
+  position: fixed;
   top: 80px;
   right: 0;
   z-index: 9999;
   display: flex;
   align-items: center;
-  width: fit-content;
+  width: 0;
   height: 80px;
   padding: 0 16px;
+  overflow: hidden;
+  white-space: nowrap;
   background-color: colors.$ORANGE2;
   border-top-left-radius: 8px;
   transition: all 0.3s;
-  animation: {
-    fill-mode: forwards;
-    /* stylelint-disable-next-line value-keyword-case */
-    name: drawerInAni, drawerOutAni;
-    delay: 0s, 4s;
-    duration: 1s, 1s;
-    timing-function: ease-in, ease-in-out;
-  }
+  animation: drawerInAni 1s forwards linear;
 
   &::after {
     position: absolute;
@@ -32,7 +27,7 @@
     content: "";
     background-color: colors.$RED;
     transition: all 0.3s;
-    animation: progressAni 3s forwards linear;
+    animation: progressAni 4s forwards linear;
     animation-delay: 1s;
   }
 
@@ -44,21 +39,11 @@
 
 @keyframes drawerInAni {
   0% {
-    transform: translateX(300px);
+    width: 0;
   }
 
   100% {
-    transform: translateX(0);
-  }
-}
-
-@keyframes drawerOutAni {
-  0% {
-    transform: translateX(0);
-  }
-
-  100% {
-    transform: translateX(300px);
+    width: 300px;
   }
 }
 
