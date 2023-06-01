@@ -1,4 +1,5 @@
 import { TCheckRegister } from "types/auth";
+import { TAxiosReturn } from "types/common";
 import { TGithubRepos } from "types/github";
 import { TCreatePlan } from "types/write";
 import { getSessionStorage } from "utils/storage";
@@ -24,12 +25,12 @@ export const createPlan = async ({
   register_date,
   repository,
 }: TCreatePlan): Promise<{ result: boolean }> => {
-  const { data } = await Axios.post<{ result: boolean }>("/api/plan/write", {
+  const { data } = await Axios.post<TAxiosReturn<{ result: boolean }>>("/api/plan/write", {
     content,
     member_id,
     register_date,
     repository,
   });
 
-  return data;
+  return data.data;
 };

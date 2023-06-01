@@ -2,7 +2,7 @@
 @use "assets/scss/config/fonts";
 
 body {
-  overflow: hidden;
+  min-width: 1400px;
 }
 
 /* stylelint-disable-next-line selector-max-id */

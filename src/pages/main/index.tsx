@@ -1,14 +1,37 @@
 import styles from "assets/scss/pages/main/index.module.scss";
+
+import { useQuery } from "@tanstack/react-query";
+import { useRecoilValue } from "recoil";
+import { useEffect } from "react";
+
 import { Calendar } from "components/other";
 import { dayString } from "constants/common";
+import queryKey from "constants/queryKey";
 import useDate from "hooks/useDate";
-import { useRecoilValue } from "recoil";
-import { nowState } from "recoils/common";
-import { TNow } from "types/common";
+import { userInfoState } from "recoils/auth";
+import { getHistories } from "services/main";
+import { ModalType } from "utils/modal";
+import useGlobalModalContext from "hooks/useGlobalModalContext";
 
 export default function Main() {
-  const now = useRecoilValue<TNow>(nowState);
-  const { moveMonth, resetNowRecoilState } = useDate();
+  const { now, moveMonth, resetNowRecoilState } = useDate();
+
+  const { id } = useRecoilValue(userInfoState);
+
+  // TO-BE: error handling
+  const { data, isLoading, isFetching, isError, error } = useQuery([queryKey.GET_HISTORIES, now.year, now.month], () =>
+    getHistories(id, now.year, now.month)
+  );
+
+  const { show, hide } = useGlobalModalContext();
+
+  useEffect(() => {
+    if (isLoading || isFetching) {
+      show(ModalType.LOADING);
+    } else {
+      hide();
+    }
+  }, [isLoading, isFetching]);
 
   return (
     <>
@@ -32,7 +55,7 @@ export default function Main() {
         ))}
       </div>
 
-      <Calendar now={now} />
+      <Calendar now={now} planList={data || []} />
     </>
   );
 }

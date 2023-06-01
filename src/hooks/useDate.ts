@@ -32,5 +32,5 @@ export default function useDate() {
   // 오늘 날짜 이동하기 위한 상태값 초기화
   const resetNowRecoilState = useResetRecoilState(nowState);
 
-  return { firstDay, lastDate, today, moveDate, moveMonth, resetNowRecoilState };
+  return { firstDay, lastDate, today, now, moveDate, moveMonth, resetNowRecoilState };
 }

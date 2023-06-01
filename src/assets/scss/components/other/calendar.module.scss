@@ -9,6 +9,7 @@
   .date {
     width: calc(100% / 7);
     height: 150px;
+    padding: 0 8px;
     padding-top: 8px;
     cursor: pointer;
     border-top: 1px solid colors.$BLACK;
@@ -16,7 +17,6 @@
 
   .number {
     @include fontSize.fontSize(20, 700);
-    padding-left: 8px;
   }
 
   .now {
@@ -24,6 +24,21 @@
     border-color: colors.$ORANGE;
 
     .number {
+      color: colors.$ORANGE;
+    }
+  }
+
+  ul {
+    list-style: none;
+  }
+
+  .plan {
+    &::before {
+      margin-right: 4px;
+      content: "✓";
+    }
+
+    &:hover {
       color: colors.$ORANGE;
     }
   }

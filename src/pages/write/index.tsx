@@ -7,6 +7,7 @@ import styles from "assets/scss/pages/write/index.module.scss";
 import { useEffect, useRef, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useRecoilValue } from "recoil";
+import { useQueryClient } from "@tanstack/react-query";
 
 import { userInfoState } from "recoils/auth";
 import { Dropdown } from "components/menu";
@@ -14,24 +15,27 @@ import { ModalType } from "utils/modal";
 import useGlobalModalContext from "hooks/useGlobalModalContext";
 import useDate from "hooks/useDate";
 import useWriteApi from "./useWriteApi";
+import queryKey from "constants/queryKey";
 
 export default function Write() {
   const [repository, setRepository] = useState("-- 선택 --");
   const [isOpen, setIsOpen] = useState(false);
 
-  const { show, hide } = useGlobalModalContext();
-
   const dateRef = useRef<HTMLInputElement>(null);
   const editerRef = useRef<any>(null);
+
+  const queryClient = useQueryClient();
+
+  const { id } = useRecoilValue(userInfoState);
+
+  const navigate = useNavigate();
 
   // TO-BE: error handling
   const { repositoryList, createPlanMutate, isError, error, isLoading } = useWriteApi();
 
   const { today } = useDate();
 
-  const { id } = useRecoilValue(userInfoState);
-
-  const navigate = useNavigate();
+  const { show, hide } = useGlobalModalContext();
 
   useEffect(() => {
     if (isLoading) {
@@ -70,6 +74,7 @@ export default function Write() {
       {
         onSuccess: () => {
           hide();
+          queryClient.resetQueries([queryKey.GET_HISTORIES, new Date(dateRef.current!.value).getMonth() + 1]);
           navigate("/");
         },
       }
