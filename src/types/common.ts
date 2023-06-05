@@ -15,5 +15,6 @@ export type TPlan = {
   content: string;
   repository: string;
   register_date: string;
-  member_id: string;
+  status: number;
+  member_id: number;
 };

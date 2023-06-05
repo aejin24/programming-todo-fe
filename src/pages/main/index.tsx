@@ -4,7 +4,6 @@ import { useQuery } from "@tanstack/react-query";
 import { useRecoilValue } from "recoil";
 import { useEffect } from "react";
 
-import { Calendar } from "components/other";
 import { dayString } from "constants/common";
 import queryKey from "constants/queryKey";
 import useDate from "hooks/useDate";
@@ -12,6 +11,7 @@ import { userInfoState } from "recoils/auth";
 import { getPlans } from "services/main";
 import { ModalType } from "utils/modal";
 import useGlobalModalContext from "hooks/useGlobalModalContext";
+import Calendar from "./Calendar";
 
 export default function Main() {
   const { now, moveMonth, resetNowRecoilState } = useDate();
