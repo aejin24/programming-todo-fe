@@ -6,3 +6,9 @@ export const getPlans = async (memberId: number, year: number, month: number): P
 
   return data.data;
 };
+
+export const deletePlan = async (id: number): Promise<{ result: boolean }> => {
+  const { data } = await Axios.post<TAxiosReturn<{ result: boolean }>>(`/api/plan/delete/${id}`);
+
+  return data.data;
+};
