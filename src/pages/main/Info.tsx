@@ -15,7 +15,7 @@ const Info = forwardRef<HTMLDivElement, TProps>(({ plan }, ref) => {
   return (
     <Portal>
       <div className={styles.wrapper} ref={ref}>
-        <div className={styles["info-wrapper"]}>
+        <div className={styles["info-wrapper"]} onClick={(e) => e.stopPropagation()}>
           <div className={styles.header}>
             <p className={styles.repo}>{plan.repository}</p>
             <p className={styles.status}>{plan.register_date}</p>
@@ -30,7 +30,7 @@ const Info = forwardRef<HTMLDivElement, TProps>(({ plan }, ref) => {
               checked={plan.status === 0}
               readOnly
               className={styles.radio}
-              handleChange={() => {}}
+              handleChange={() => {}} // TO-BE: edite 모드일 때 내용 채우기
             />
             <Radio
               name="status"
@@ -40,7 +40,7 @@ const Info = forwardRef<HTMLDivElement, TProps>(({ plan }, ref) => {
               checked={plan.status === 1}
               readOnly
               className={styles.radio}
-              handleChange={() => {}}
+              handleChange={() => {}} // TO-BE: edite 모드일 때 내용 채우기
             />
           </div>
 
