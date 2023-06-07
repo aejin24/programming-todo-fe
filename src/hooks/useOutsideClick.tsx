@@ -5,8 +5,8 @@ import { BaseSyntheticEvent, useEffect, useRef } from "react";
  * @param callback 바깥 영역 클릭 시 취할 행위
  * @returns ref
  */
-export default function useOutsideClick(callback: () => void) {
-  const ref = useRef<any>(null);
+export default function useOutsideClick<T extends HTMLElement>(callback: () => void) {
+  const ref = useRef<T>(null);
 
   useEffect(() => {
     const handleClick = (event: BaseSyntheticEvent | MouseEvent) => {

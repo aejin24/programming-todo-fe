@@ -23,7 +23,7 @@ export default function Calendar({ now, planList }: TProps) {
     status: 0,
   });
 
-  const infoRef = useOutsideClick(() => setIsOpen(false));
+  const infoRef = useOutsideClick<HTMLDivElement>(() => setIsOpen(false));
 
   const createDate = (_firstDay: number, _lastDate: number) => {
     const dateArr = [];
