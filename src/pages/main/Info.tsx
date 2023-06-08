@@ -3,29 +3,32 @@ import styles from "assets/scss/pages/main/info.module.scss";
 import { Viewer } from "@toast-ui/react-editor";
 
 import { forwardRef, useEffect } from "react";
-import { useQueryClient } from "@tanstack/react-query";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { useNavigate } from "react-router-dom";
 
 import { Portal } from "components/other";
 import { Radio } from "components/input";
 import { TPlan } from "types/common";
-import useMainFetch from "./useMainFetch";
 import useGlobalModalContext from "hooks/useGlobalModalContext";
 import { ModalType } from "utils/modal";
 import useDate from "hooks/useDate";
 import queryKey from "constants/queryKey";
+import { deletePlan } from "services/main";
 
 type TProps = {
   plan: TPlan;
 };
 
 const Info = forwardRef<HTMLDivElement, TProps>(({ plan }, ref) => {
-  const { deleteMutate, isLoading } = useMainFetch();
+  const { mutate, isLoading } = useMutation(deletePlan);
 
   const { show, hide } = useGlobalModalContext();
 
   const { now } = useDate();
 
   const queryClient = useQueryClient();
+
+  const navigate = useNavigate();
 
   const handleDeleteBtnClick = () => {
     show(ModalType.DIALOG, {
@@ -35,7 +38,7 @@ const Info = forwardRef<HTMLDivElement, TProps>(({ plan }, ref) => {
       submitText: "삭제",
       handleCancelBtnClick: () => hide(),
       handleSubmitBtnClick: () => {
-        deleteMutate(plan.id, {
+        mutate(plan.id, {
           onSuccess: () => {
             hide();
             queryClient.resetQueries([queryKey.GET_PLANS, now.year, now.month]);
@@ -96,7 +99,7 @@ const Info = forwardRef<HTMLDivElement, TProps>(({ plan }, ref) => {
             <button type="button" className={styles.delete} onClick={handleDeleteBtnClick}>
               삭제
             </button>
-            <button type="button" className={styles.update}>
+            <button type="button" className={styles.update} onClick={() => navigate(`/write?id=${plan.id}`)}>
               수정
             </button>
           </div>
