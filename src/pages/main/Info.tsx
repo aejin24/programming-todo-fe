@@ -79,7 +79,6 @@ const Info = forwardRef<HTMLDivElement, TProps>(({ plan }, ref) => {
               checked={plan.status === 0}
               readOnly
               className={styles.radio}
-              handleChange={() => {}} // TO-BE: edite 모드일 때 내용 채우기
             />
             <Radio
               name="status"
@@ -89,7 +88,6 @@ const Info = forwardRef<HTMLDivElement, TProps>(({ plan }, ref) => {
               checked={plan.status === 1}
               readOnly
               className={styles.radio}
-              handleChange={() => {}} // TO-BE: edite 모드일 때 내용 채우기
             />
           </div>
 
