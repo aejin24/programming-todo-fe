@@ -97,7 +97,11 @@ const Info = forwardRef<HTMLDivElement, TProps>(({ plan }, ref) => {
             <button type="button" className={styles.delete} onClick={handleDeleteBtnClick}>
               삭제
             </button>
-            <button type="button" className={styles.update} onClick={() => navigate(`/write?id=${plan.id}`)}>
+            <button
+              type="button"
+              className={styles.update}
+              onClick={() => navigate("/write", { state: { isEditMode: true, plan } })}
+            >
               수정
             </button>
           </div>

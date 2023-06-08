@@ -149,3 +149,54 @@
   color: colors.$WHITE;
   background-color: colors.$ORANGE;
 }
+
+.radio {
+  &-wrapper {
+    margin-bottom: 8px;
+  }
+  display: none;
+
+  + label {
+    position: relative;
+    margin-right: 8px;
+    font-size: 14px;
+    cursor: pointer;
+
+    &::before {
+      display: inline-block;
+      width: 10px;
+      height: 10px;
+      margin-right: 4px;
+      content: "";
+      border: 1px solid colors.$GRAY4;
+      border-radius: 9999px;
+    }
+
+    &::after {
+      position: absolute;
+      top: 7.5px;
+      left: 3.5px;
+      display: inline-block;
+      width: 5px;
+      height: 5px;
+      content: "";
+      background-color: colors.$GRAY4;
+      border-radius: 9999px;
+    }
+  }
+
+  &:checked {
+    + label {
+      color: colors.$ORANGE;
+
+      &::before {
+        border-color: colors.$ORANGE;
+      }
+
+      &::after {
+        content: "";
+        background-color: colors.$ORANGE;
+      }
+    }
+  }
+}

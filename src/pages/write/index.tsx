@@ -5,7 +5,7 @@ import { Editor } from "@toast-ui/react-editor";
 import styles from "assets/scss/pages/write/index.module.scss";
 
 import { useEffect, useRef, useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { useRecoilValue } from "recoil";
 import { useQueryClient } from "@tanstack/react-query";
 
@@ -13,13 +13,25 @@ import { userInfoState } from "recoils/auth";
 import { Dropdown } from "components/menu";
 import { ModalType } from "utils/modal";
 import useGlobalModalContext from "hooks/useGlobalModalContext";
-import useDate from "hooks/useDate";
-import useWriteApi from "./useWriteApi";
+import useWriteFetch from "./useWriteFetch";
 import queryKey from "constants/queryKey";
+import { TPlan } from "types/common";
+import { Radio } from "components/input";
+
+type TProps = {
+  isEditMode: boolean;
+  plan: TPlan;
+};
 
 export default function Write() {
-  const [repository, setRepository] = useState("-- 선택 --");
+  const navigate = useNavigate();
+  const location = useLocation();
+
+  const { isEditMode, plan } = (location?.state || {}) as TProps;
+
+  const [repository, setRepository] = useState(isEditMode ? plan!.repository : "-- 선택 --");
   const [isOpen, setIsOpen] = useState(false);
+  const [status, setStatus] = useState(plan.status);
 
   const dateRef = useRef<HTMLInputElement>(null);
   const editerRef = useRef<any>(null);
@@ -28,12 +40,8 @@ export default function Write() {
 
   const { id } = useRecoilValue(userInfoState);
 
-  const navigate = useNavigate();
-
   // TO-BE: error handling
-  const { repositoryList, createPlanMutate, isError, error, isLoading } = useWriteApi();
-
-  const { today } = useDate();
+  const { repositoryList, updatePlanMutate, createPlanMutate, isError, error, isLoading } = useWriteFetch();
 
   const { show, hide } = useGlobalModalContext();
 
@@ -44,6 +52,36 @@ export default function Write() {
       hide();
     }
   }, [isLoading]);
+
+  useEffect(() => {
+    if (dateRef.current && editerRef.current) {
+      if (isEditMode) {
+        dateRef.current.value = plan.register_date;
+        editerRef.current.getInstance().setMarkdown(plan.content);
+      } else {
+        setRepository("-- 선택 --");
+        dateRef.current.value = "";
+        editerRef.current.getInstance().reset();
+      }
+    }
+  }, [isEditMode]);
+
+  const mutateSuccessHandler = () => {
+    hide();
+
+    queryClient.resetQueries([
+      queryKey.GET_PLANS,
+      new Date(dateRef.current!.value).getFullYear(),
+      new Date(dateRef.current!.value).getMonth() + 1,
+    ]);
+    queryClient.resetQueries([
+      queryKey.GET_PLANS,
+      new Date(plan.register_date).getFullYear(),
+      new Date(plan.register_date).getMonth() + 1,
+    ]);
+
+    navigate("/");
+  };
 
   const handleSubmitBtn = async () => {
     if (repository === "-- 선택 --") {
@@ -58,7 +96,7 @@ export default function Write() {
       return;
     }
 
-    if (editerRef.current.getInstance().getHTML() === "<p><br></p>") {
+    if (!editerRef.current.getInstance().getMarkdown()) {
       show(ModalType.ALERT, { text: "할 일을 입력해주세요!" });
 
       return;
@@ -66,30 +104,34 @@ export default function Write() {
 
     show(ModalType.DIALOG, {
       type: "SUBMIT",
-      title: "신규 등록을 하시겠습니까?",
+      title: isEditMode ? "수정하시겠습니까?" : "신규 등록을 하시겠습니까?",
       cancelText: "취소",
-      submitText: "등록",
+      submitText: isEditMode ? "수정" : "등록",
       handleCancelBtnClick: () => hide(),
       handleSubmitBtnClick: () => {
-        createPlanMutate(
-          {
-            content: editerRef.current.getInstance().getHTML(),
-            member_id: id,
-            register_date: dateRef.current!.value,
-            repository,
-          },
-          {
-            onSuccess: () => {
-              hide();
-              queryClient.resetQueries([
-                queryKey.GET_PLANS,
-                new Date(dateRef.current!.value).getFullYear(),
-                new Date(dateRef.current!.value).getMonth() + 1,
-              ]);
-              navigate("/");
+        if (isEditMode) {
+          updatePlanMutate(
+            {
+              content: editerRef.current.getInstance().getMarkdown(),
+              member_id: id,
+              register_date: dateRef.current!.value,
+              repository,
+              id: plan.id,
+              status,
             },
-          }
-        );
+            { onSuccess: mutateSuccessHandler }
+          );
+        } else {
+          createPlanMutate(
+            {
+              content: editerRef.current.getInstance().getMarkdown(),
+              member_id: id,
+              register_date: dateRef.current!.value,
+              repository,
+            },
+            { onSuccess: mutateSuccessHandler }
+          );
+        }
       },
     });
   };
@@ -120,16 +162,36 @@ export default function Write() {
 
       <div className={styles["input-wrapper"]}>
         <p className={styles.label}>날짜</p>
-        <input
-          min={today}
-          type="date"
-          name="date"
-          data-placeholder="날짜 선택"
-          className={styles.date}
-          required
-          ref={dateRef}
-        />
+        <input type="date" name="date" data-placeholder="날짜 선택" className={styles.date} required ref={dateRef} />
       </div>
+
+      {isEditMode && (
+        <div className={styles["input-wrapper"]}>
+          <p className={styles.label}>진행 상태</p>
+          <div className={styles["radio-wrapper"]}>
+            <Radio
+              name="status"
+              id="progress"
+              value={0}
+              label="진행중"
+              checked={status.toString() === "0"}
+              readOnly
+              className={styles.radio}
+              handleChange={({ value }) => setStatus(value)}
+            />
+            <Radio
+              name="status"
+              id="done"
+              value={1}
+              label="완료"
+              checked={status.toString() === "1"}
+              readOnly
+              className={styles.radio}
+              handleChange={({ value }) => setStatus(value)}
+            />
+          </div>
+        </div>
+      )}
 
       <div className={styles["input-wrapper"]}>
         <p className={styles.label}>할 일</p>
@@ -148,7 +210,7 @@ export default function Write() {
           취소
         </Link>
         <button className={styles.register} onClick={handleSubmitBtn}>
-          신규 등록
+          {isEditMode ? "수정" : "신규 등록"}
         </button>
       </div>
     </>

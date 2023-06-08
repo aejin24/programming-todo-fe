@@ -9,7 +9,11 @@ export default function Nav() {
         <AllIcon />
         전체
       </NavLink>
-      <NavLink to="/write" className={({ isActive }) => (isActive ? styles.selected : undefined)}>
+      <NavLink
+        to="/write"
+        className={({ isActive }) => (isActive ? styles.selected : undefined)}
+        state={{ isEditMode: false, plan: {} }}
+      >
         <WriteIcon />
         작성
       </NavLink>
