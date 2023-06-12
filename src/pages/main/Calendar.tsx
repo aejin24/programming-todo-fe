@@ -34,6 +34,8 @@ export default function Calendar({ now, planList }: TProps) {
 
     for (let i = 1, max = _lastDate; i <= max; i++) {
       const nowDate = new Date(now.year, now.month, i).getDay();
+      const filterPlan = planList.filter((plan) => new Date(plan.register_date).getDate() === i);
+
       dateArr.push(
         <div
           className={`${styles.date} ${i === now.date ? styles.now : ""}`}
@@ -42,23 +44,23 @@ export default function Calendar({ now, planList }: TProps) {
         >
           <p className={styles.number}>{i}</p>
           <ul>
-            {planList
-              .filter((plan) => new Date(plan.register_date).getDate() === i)
-              .map((p) => (
-                <li
-                  className={styles.plan}
-                  key={p.id + p.register_date}
-                  data-icon={p.status === 0 ? "✓" : "⍻"}
-                  onClick={(e) => {
-                    e.stopPropagation();
-                    setPlan(p);
-                    setIsOpen(true);
-                  }}
-                >
-                  {p.repository}
-                </li>
-              ))}
+            {filterPlan.slice(0, 3).map((p) => (
+              <li
+                className={styles.plan}
+                key={p.id + p.register_date}
+                data-icon={p.status === 0 ? "✓" : "⍻"}
+                onClick={(e) => {
+                  e.stopPropagation();
+                  setPlan(p);
+                  setIsOpen(true);
+                }}
+              >
+                {p.repository}
+              </li>
+            ))}
           </ul>
+
+          {filterPlan.length >= 5 && <button className={styles.more}>+ MORE</button>}
         </div>
       );
     }

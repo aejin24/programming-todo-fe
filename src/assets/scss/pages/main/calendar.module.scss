@@ -44,3 +44,12 @@
     }
   }
 }
+
+.more {
+  @include fontSize.fontSize(14, 700);
+  color: colors.$ORANGE;
+  cursor: pointer;
+  background-color: transparent;
+  border: none;
+  border-bottom: 1px solid colors.$ORANGE;
+}

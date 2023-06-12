@@ -43,8 +43,6 @@ export const updatePlan = async ({
   status,
   id,
 }: TPlan): Promise<{ result: boolean }> => {
-  console.log(content, member_id, register_date, repository, status, id);
-
   const { data } = await Axios.post<TAxiosReturn<{ result: boolean }>>("/api/plan/update", {
     content,
     member_id,
