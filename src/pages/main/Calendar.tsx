@@ -50,8 +50,7 @@ export default function Calendar({ now, planList }: TProps) {
                 className={styles.plan}
                 key={p.id + p.register_date}
                 data-icon={p.status === 0 ? "✓" : "⍻"}
-                onClick={(e) => {
-                  e.stopPropagation();
+                onClick={() => {
                   setPlan(p);
                   setIsOpen(true);
                 }}
