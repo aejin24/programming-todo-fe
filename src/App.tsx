@@ -1,6 +1,6 @@
 import { Route, Routes } from "react-router-dom";
 
-import { Skeleton } from "components/other";
+import { NavSkeleton, Skeleton } from "components/other";
 import Main from "pages/main";
 import Write from "pages/write";
 import NotFound from "pages/notFound";
@@ -20,18 +20,13 @@ export default function App() {
           </PrivateRoute>
         }
       >
-        <Route index element={<Main />} />
-        <Route path="/write" element={<Write />} />
-      </Route>
+        <Route element={<NavSkeleton />}>
+          <Route index element={<Main />} />
+          <Route path="/write" element={<Write />} />
+        </Route>
 
-      <Route
-        path="/mypage"
-        element={
-          <PrivateRoute>
-            <div>mypage</div>
-          </PrivateRoute>
-        }
-      />
+        <Route path="/mypage" element={<div>mypage</div>} />
+      </Route>
 
       <Route path="*" element={<NotFound />} />
     </Routes>

@@ -3,7 +3,6 @@ import { Link, Outlet, useNavigate } from "react-router-dom";
 import styles from "assets/scss/components/other/skeleton.module.scss";
 import { LogoutIcon, MyPageIcon } from "assets/svgs";
 import { removeSessionStorage } from "utils/storage";
-import Nav from "./Nav";
 
 export default function Skeleton() {
   const navigate = useNavigate();
@@ -33,10 +32,7 @@ export default function Skeleton() {
       </header>
 
       <div className={styles.bottom}>
-        <Nav />
-        <div className={styles.pannel}>
-          <Outlet />
-        </div>
+        <Outlet />
       </div>
     </div>
   );
