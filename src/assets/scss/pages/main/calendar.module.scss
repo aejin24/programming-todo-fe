@@ -9,10 +9,10 @@
   .date {
     width: calc(100% / 7);
     min-height: 150px;
-    padding: 0 8px;
-    padding-top: 8px;
+    padding: 8px;
     cursor: pointer;
     border-top: 1px solid colors.$BLACK;
+    transition: all 0.3s ease;
   }
 
   .number {
@@ -47,9 +47,12 @@
 
 .more {
   @include fontSize.fontSize(14, 700);
-  color: colors.$ORANGE;
+  display: block;
+  width: 100%;
+  padding: 0 8px;
+  margin-top: 8px;
+  color: colors.$WHITE;
   cursor: pointer;
-  background-color: transparent;
+  background-color: colors.$ORANGE;
   border: none;
-  border-bottom: 1px solid colors.$ORANGE;
 }

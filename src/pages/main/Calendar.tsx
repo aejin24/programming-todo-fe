@@ -13,6 +13,7 @@ type TProps = {
 export default function Calendar({ now, planList }: TProps) {
   const { firstDay, lastDate, moveDate } = useDate();
 
+  const [hide, setHide] = useState(true);
   const [isOpen, setIsOpen] = useState(false);
   const [plan, setPlan] = useState<TPlan>({
     content: "",
@@ -44,7 +45,7 @@ export default function Calendar({ now, planList }: TProps) {
         >
           <p className={styles.number}>{i}</p>
           <ul>
-            {filterPlan.slice(0, 3).map((p) => (
+            {filterPlan.slice(0, hide ? 3 : filterPlan.length).map((p) => (
               <li
                 className={styles.plan}
                 key={p.id + p.register_date}
@@ -60,7 +61,11 @@ export default function Calendar({ now, planList }: TProps) {
             ))}
           </ul>
 
-          {filterPlan.length >= 5 && <button className={styles.more}>+ MORE</button>}
+          {filterPlan.length >= 3 && (
+            <button className={styles.more} onClick={() => setHide(!hide)}>
+              {hide ? `\u002B MORE` : "\u002D HIDE"}
+            </button>
+          )}
         </div>
       );
     }
