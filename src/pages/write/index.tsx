@@ -80,7 +80,7 @@ export default function Write() {
       new Date(plan.register_date).getMonth() + 1,
     ]);
 
-    navigate("/");
+    navigate("/calendar");
   };
 
   const handleSubmitBtn = async () => {
@@ -206,7 +206,7 @@ export default function Write() {
       </div>
 
       <div className={styles["btn-wrapper"]}>
-        <Link to="/" className={styles.cancel}>
+        <Link to="/calendar" className={styles.cancel}>
           취소
         </Link>
         <button className={styles.register} onClick={handleSubmitBtn}>

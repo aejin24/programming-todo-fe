@@ -6,6 +6,7 @@ import Write from "pages/write";
 import NotFound from "pages/notFound";
 import { Auth, Login } from "pages/login";
 import PrivateRoute from "utils/PrivateRoute";
+import Dashboard from "pages/dashboard";
 
 export default function App() {
   return (
@@ -21,7 +22,8 @@ export default function App() {
         }
       >
         <Route element={<NavSkeleton />}>
-          <Route index element={<Main />} />
+          <Route index element={<Dashboard />} />
+          <Route path="/calendar" element={<Main />} />
           <Route path="/write" element={<Write />} />
         </Route>
 

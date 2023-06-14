@@ -58,7 +58,7 @@ export default function Calendar({ now, planList }: TProps) {
             ))}
           </ul>
 
-          {filterPlan.length >= 3 && (
+          {filterPlan.length > 3 && (
             <button className={styles.more} onClick={() => setHide(!hide)}>
               {hide ? `\u002B MORE` : "\u002D HIDE"}
             </button>

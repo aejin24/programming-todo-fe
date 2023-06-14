@@ -1,0 +1,67 @@
+@use "assets/scss/config/colors";
+@use "assets/scss/mixin/fontSize";
+
+.top {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  margin-bottom: 16px;
+}
+
+.title {
+  @include fontSize.fontSize(36, 700);
+}
+
+.create-btn {
+  width: 200px;
+  height: 52px;
+  color: colors.$ORANGE;
+  cursor: pointer;
+  background-color: colors.$ORANGE2;
+  border: 1px solid colors.$ORANGE;
+  border-radius: 999px;
+}
+
+.summary {
+  width: calc(100% / 3 - 16px);
+  height: 150px;
+  padding: 24px;
+  background: url(../../../images/calendar-purple.png) no-repeat 110% -50% / 50% colors.$PURPLE2;
+  border: 1px solid colors.$BLACK;
+  border-radius: 8px;
+  transition: all 0.2s ease;
+
+  &:nth-of-type(2) {
+    background: url(../../../images/timer.png) no-repeat 110% -50% / 50% colors.$BEIGE;
+  }
+
+  &:last-of-type {
+    background: url(../../../images/checked.png) no-repeat 110% -50% / 50% colors.$BLUE2;
+  }
+
+  p {
+    @include fontSize.fontSize(28, 700);
+
+    &:last-of-type {
+      @include fontSize.fontSize(18, 500);
+    }
+  }
+
+  &:hover {
+    background: {
+      position: 100% -20%;
+      size: 60%;
+    }
+  }
+
+  &-wrapper {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    margin-bottom: 48px;
+  }
+}
+
+.chart {
+  margin-bottom: 48px;
+}
