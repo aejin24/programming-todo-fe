@@ -1,7 +1,10 @@
+import { useState } from "react";
+
+import cx from "classnames";
+
 import styles from "assets/scss/pages/main/calendar.module.scss";
 import useDate from "hooks/useDate";
 import useOutsideClick from "hooks/useOutsideClick";
-import { useState } from "react";
 import { TNow, TPlan } from "types/common";
 import Info from "./Info";
 
@@ -38,18 +41,13 @@ export default function Calendar({ now, planList }: TProps) {
       const filterPlan = planList.filter((plan) => new Date(plan.register_date).getDate() === i);
 
       dateArr.push(
-        <div
-          className={`${styles.date} ${i === now.date ? styles.now : ""}`}
-          key={i}
-          onClick={() => moveDate(i, nowDate)}
-        >
+        <div className={cx(styles.date, i === now.date && styles.now)} key={i} onClick={() => moveDate(i, nowDate)}>
           <p className={styles.number}>{i}</p>
           <ul>
             {filterPlan.slice(0, hide ? 3 : filterPlan.length).map((p) => (
               <li
-                className={styles.plan}
+                className={cx(styles.plan, p.status === 1 && styles.underline)}
                 key={p.id + p.register_date}
-                data-icon={p.status === 0 ? "✓" : "⍻"}
                 onClick={() => {
                   setPlan(p);
                   setIsOpen(true);
