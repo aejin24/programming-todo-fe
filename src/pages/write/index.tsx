@@ -79,6 +79,7 @@ export default function Write() {
       new Date(plan.register_date).getFullYear(),
       new Date(plan.register_date).getMonth() + 1,
     ]);
+    queryClient.resetQueries([queryKey.GET_PLAN_COUNT, id]);
 
     navigate("/calendar");
   };

@@ -16,7 +16,7 @@ export default function Skeleton() {
     <div className={styles.wrapper}>
       <header className={styles.header}>
         <Link to="/" className={styles.title}>
-          프로젝트 명..
+          PT
         </Link>
 
         <div className={styles["btn-wrapper"]}>

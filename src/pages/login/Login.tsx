@@ -9,7 +9,7 @@ export default function Login() {
   return (
     <div className={styles.wrapper}>
       <div className={styles["content-wrapper"]}>
-        <p className={styles.title}>Coding Diary</p>
+        <p className={styles.title}>PT</p>
 
         <button type="button" className={styles["social-btn"]} onClick={handleGithubLogin}>
           <img src={githubImage} alt="github" />

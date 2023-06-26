@@ -5,6 +5,7 @@ import { Viewer } from "@toast-ui/react-editor";
 import { forwardRef, useEffect } from "react";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { useNavigate } from "react-router-dom";
+import { useRecoilValue } from "recoil";
 
 import { Portal } from "components/other";
 import { Radio } from "components/input";
@@ -14,6 +15,7 @@ import { ModalType } from "utils/modal";
 import useDate from "hooks/useDate";
 import queryKey from "constants/queryKey";
 import { deletePlan } from "services/main";
+import { userInfoState } from "recoils/auth";
 
 type TProps = {
   plan: TPlan;
@@ -30,6 +32,8 @@ const Info = forwardRef<HTMLDivElement, TProps>(({ plan }, ref) => {
 
   const navigate = useNavigate();
 
+  const { id } = useRecoilValue(userInfoState);
+
   const handleDeleteBtnClick = () => {
     show(ModalType.DIALOG, {
       type: "SUBMIT",
@@ -42,6 +46,7 @@ const Info = forwardRef<HTMLDivElement, TProps>(({ plan }, ref) => {
           onSuccess: () => {
             hide();
             queryClient.resetQueries([queryKey.GET_PLANS, now.year, now.month]);
+            queryClient.resetQueries([queryKey.GET_PLAN_COUNT, id]);
 
             if (typeof ref !== "function") {
               ref?.current?.click();
