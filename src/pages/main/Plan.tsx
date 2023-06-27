@@ -7,8 +7,8 @@ import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { useNavigate } from "react-router-dom";
 import { useRecoilValue } from "recoil";
 
-import { Portal } from "components/other";
 import { Radio } from "components/input";
+import { Popup } from "components/other";
 import { TPlan } from "types/common";
 import useGlobalModalContext from "hooks/useGlobalModalContext";
 import { ModalType } from "utils/modal";
@@ -21,7 +21,7 @@ type TProps = {
   plan: TPlan;
 };
 
-const Info = forwardRef<HTMLDivElement, TProps>(({ plan }, ref) => {
+const Plan = forwardRef<HTMLDivElement, TProps>(({ plan }, ref) => {
   const { mutate, isLoading } = useMutation(deletePlan);
 
   const { show, hide } = useGlobalModalContext();
@@ -67,53 +67,51 @@ const Info = forwardRef<HTMLDivElement, TProps>(({ plan }, ref) => {
   }, [isLoading]);
 
   return (
-    <Portal>
-      <div className={styles.wrapper} ref={ref}>
-        <div className={styles["info-wrapper"]} onClick={(e) => e.stopPropagation()}>
-          <div className={styles.header}>
-            <p className={styles.repo}>{plan.repository}</p>
-            <p className={styles.status}>{plan.register_date}</p>
-          </div>
+    <Popup ref={ref}>
+      <div className={styles["info-wrapper"]} onClick={(e) => e.stopPropagation()}>
+        <div className={styles.header}>
+          <p className={styles.repo}>{plan.repository}</p>
+          <p className={styles.status}>{plan.register_date}</p>
+        </div>
 
-          <div className={styles["radio-wrapper"]}>
-            <Radio
-              name="status"
-              id="progress"
-              value={0}
-              label="진행중"
-              checked={plan.status === 0}
-              readOnly
-              className={styles.radio}
-            />
-            <Radio
-              name="status"
-              id="done"
-              value={1}
-              label="완료"
-              checked={plan.status === 1}
-              readOnly
-              className={styles.radio}
-            />
-          </div>
+        <div className={styles["radio-wrapper"]}>
+          <Radio
+            name="status"
+            id="progress"
+            value={0}
+            label="진행중"
+            checked={plan.status === 0}
+            readOnly
+            className={styles.radio}
+          />
+          <Radio
+            name="status"
+            id="done"
+            value={1}
+            label="완료"
+            checked={plan.status === 1}
+            readOnly
+            className={styles.radio}
+          />
+        </div>
 
-          <Viewer initialValue={plan.content} />
+        <Viewer initialValue={plan.content} />
 
-          <div className={styles["btn-wrapper"]}>
-            <button type="button" className={styles.delete} onClick={handleDeleteBtnClick}>
-              삭제
-            </button>
-            <button
-              type="button"
-              className={styles.update}
-              onClick={() => navigate("/write", { state: { isEditMode: true, plan } })}
-            >
-              수정
-            </button>
-          </div>
+        <div className={styles["btn-wrapper"]}>
+          <button type="button" className={styles.delete} onClick={handleDeleteBtnClick}>
+            삭제
+          </button>
+          <button
+            type="button"
+            className={styles.update}
+            onClick={() => navigate("/write", { state: { isEditMode: true, plan } })}
+          >
+            수정
+          </button>
         </div>
       </div>
-    </Portal>
+    </Popup>
   );
 });
 
-export default Info;
+export default Plan;

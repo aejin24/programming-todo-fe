@@ -26,7 +26,8 @@
     "react-github-calendar": "^4.0.0",
     "react-router-dom": "^6.5.0",
     "recharts": "^2.6.2",
-    "recoil": "^0.7.6"
+    "recoil": "^0.7.6",
+    "styled-components": "^6.0.0-rc.6"
   },
   "devDependencies": {
     "@babel/cli": "^7.19.3",

@@ -6,7 +6,7 @@ import styles from "assets/scss/pages/main/calendar.module.scss";
 import useDate from "hooks/useDate";
 import useOutsideClick from "hooks/useOutsideClick";
 import { TNow, TPlan } from "types/common";
-import Info from "./Info";
+import Plan from "./Plan";
 
 type TProps = {
   now: TNow;
@@ -27,7 +27,7 @@ export default function Calendar({ now, planList }: TProps) {
     status: 0,
   });
 
-  const infoRef = useOutsideClick<HTMLDivElement>(() => setIsOpen(false));
+  const planRef = useOutsideClick<HTMLDivElement>(() => setIsOpen(false));
 
   const createDate = (_firstDay: number, _lastDate: number) => {
     const dateArr = [];
@@ -74,7 +74,7 @@ export default function Calendar({ now, planList }: TProps) {
     <>
       <div className={styles.wrapper}>{createDate(firstDay, lastDate)}</div>
 
-      {isOpen && <Info plan={plan} ref={infoRef} />}
+      {isOpen && <Plan plan={plan} ref={planRef} />}
     </>
   );
 }

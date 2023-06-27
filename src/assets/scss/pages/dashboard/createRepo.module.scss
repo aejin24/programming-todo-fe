@@ -1,0 +1,85 @@
+@use "assets/scss/config/colors";
+@use "assets/scss/mixin/fontSize";
+
+%input-size {
+  width: 100%;
+  height: 48px;
+  margin-bottom: 24px;
+}
+
+.wrapper {
+  width: 600px;
+  height: fit-content;
+  padding: 32px 24px;
+  background-color: colors.$WHITE;
+  border-radius: 8px;
+
+  button {
+    width: 100%;
+    height: 48px;
+    color: colors.$WHITE;
+    cursor: pointer;
+    background-color: colors.$ORANGE;
+    border: none;
+    border-radius: 8px;
+  }
+}
+
+.top {
+  @include fontSize.fontSize(24, 700);
+}
+
+.hr {
+  margin: 16px 0 24px;
+  color: colors.$BLACK;
+}
+
+.input {
+  &-container {
+    position: relative;
+
+    input {
+      @extend %input-size;
+      padding-left: 16px;
+      background-color: transparent;
+      border: none;
+
+      &:focus + .input-name span,
+      &:valid + .input-name span {
+        display: block;
+        width: fit-content;
+        padding: 0 8px;
+        font-size: 14px;
+        line-height: 16px;
+        color: colors.$ORANGE;
+        background-color: colors.$WHITE;
+        transform: translateY(-50%);
+      }
+    }
+  }
+
+  &-name {
+    @extend %input-size;
+    position: absolute;
+    top: 0;
+    left: 0;
+    line-height: 48px;
+
+    &::after {
+      display: block;
+      width: 100%;
+      height: 100%;
+      content: "";
+      border: 1px solid colors.$GRAY;
+      border-radius: 8px;
+    }
+
+    span {
+      position: absolute;
+      display: block;
+      margin-left: 16px;
+      color: colors.$GRAY;
+      transition: all 0.3s ease;
+    }
+  }
+}
