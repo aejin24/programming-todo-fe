@@ -4,3 +4,8 @@ export type TPlanCount = {
   progressing: number;
   completed: number;
 };
+
+export type TCreateRepo = {
+  name: string;
+  description: string;
+};
